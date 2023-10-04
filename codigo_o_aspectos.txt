@@ -1,0 +1,12 @@
+public aspect VerificacaoSaldoAspect {
+    pointcut saqueEmConta(): 
+        call(void ContaBancaria.sacar(double)) && target(ContaBancaria);
+
+    before(): saqueEmConta() {
+        double valor = ((ContaBancaria) thisJoinPoint.getTarget()).getSaldo();
+        if (valor < 0) {
+            System.out.println("Saldo insuficiente para o saque de " + valor + ".");
+            throw new RuntimeException("Saldo insuficiente.");
+        }
+    }
+}

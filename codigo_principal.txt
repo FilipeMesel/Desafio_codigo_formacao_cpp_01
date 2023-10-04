@@ -1,0 +1,35 @@
+// Classe base para representar uma conta bancária
+public class ContaBancaria {
+    private double saldo;
+
+    public ContaBancaria(double saldoInicial) {
+        this.saldo = saldoInicial;
+    }
+
+    public void sacar(double valor) {
+        if (valor > 0 && saldo >= valor) {
+            saldo -= valor;
+            System.out.println("Saque de " + valor + " realizado com sucesso.");
+        } else {
+            System.out.println("Saldo insuficiente para o saque de " + valor + ".");
+        }
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+}
+
+// Classe principal do programa
+public class SistemaBancario {
+    public static void main(String[] args) {
+        ContaBancaria contaCorrente = new ContaBancaria(1000.0);
+        ContaBancaria contaPoupanca = new ContaBancaria(500.0);
+
+        contaCorrente.sacar(200.0);
+        contaPoupanca.sacar(700.0);
+
+        System.out.println("Saldo da conta corrente: " + contaCorrente.getSaldo());
+        System.out.println("Saldo da conta poupança: " + contaPoupanca.getSaldo());
+    }
+}
